@@ -1,0 +1,35 @@
+#!/usr/bin/env fish
+
+set document "\
+Clipboard on pipe.
+
+Usage 1: some-command-line | cb
+  Copy output of the command line to the clipboard.
+
+Usage 2: cb
+  Paste (print) the clipboard content.
+"
+
+for item in $argv
+    switch "$item"
+        case -h --help
+            echo "$document"
+            exit 0
+        case '*'
+            echo 'Error: invalid argument / option'
+            exit 1
+    end
+end
+
+if not command -sq xclip
+    echo 'Error: `xclip` is required, but not installed.'
+    exit 1
+end
+
+if not isatty stdin
+    # do copy action, when the standard input is connected to a pipe
+    exec xclip -selection clipboard
+else
+    # do paste action, otherwise
+    exec xclip -selection clipboard -o
+end
