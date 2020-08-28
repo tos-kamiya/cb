@@ -20,3 +20,19 @@ To paste (Extract the clipboard content),
 ```sh
 cb
 ```
+
+### Usage sample
+
+Open a new terminal and change directory to the same directory of the currrent terminal.
+
+Type in a current terminal:
+
+```sh
+pwd | cb
+```
+
+Then open a new terminal and type in it:
+
+```sh
+cd $(cb)
+```
