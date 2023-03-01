@@ -9,13 +9,19 @@ Copy `cb` to a directory on PATH, such as `~/bin/`.
 
 ## Usage
 
-To copy (send output of a command line to the clipboard),
+To copy the output of a command line to the clipboard,
 
 ```sh
-some-command-line | cb
+a-command-line | cb
 ```
 
-To paste (Extract the clipboard content),
+To paste the contents of the clipboard to another command line,
+
+```sh
+cb | another-command-line
+```
+
+To show the contents of the clipboard,
 
 ```sh
 cb
@@ -23,7 +29,7 @@ cb
 
 ### Usage sample
 
-Open a new terminal and change directory to the same directory of the currrent terminal.
+Open a new terminal and change directory to the same directory of the current terminal.
 
 Type in a current terminal:
 

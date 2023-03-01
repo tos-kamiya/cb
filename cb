@@ -3,11 +3,14 @@
 set document "\
 Clipboard on pipe.
 
-Usage 1: some-command-line | cb
-  Copy output of the command line to the clipboard.
+Usage 1: a-command-line | cb
+  Copy. Read from the pile and save the contents to the clipboard.
 
-Usage 2: cb
-  Paste (print) the clipboard content.
+Usage 2: cb | another-command-line
+  Paste. Write the contents to the pipe.
+
+Usage 3: cb
+  Peek. Print the contens of the clipboard.
 "
 
 for item in $argv
@@ -27,6 +30,11 @@ if not command -sq xclip
 end
 
 if not isatty stdin
+    if not isatty stdout
+        echo 'Error: both ends of the `cb` can not be piped.'
+        exit 1
+    end
+
     # do copy action, when the standard input is connected to a pipe
     exec xclip -selection clipboard
 else
